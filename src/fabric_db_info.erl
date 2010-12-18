@@ -24,7 +24,7 @@ go(DbName) ->
     Workers = fabric_util:submit_jobs(Shards, get_db_info, []),
     Acc0 = {fabric_dict:init(Workers, nil), []},
     {ok, Res} = fabric_util:recv(Workers, #shard.ref, fun handle_message/3, Acc0),
-    {ok, Res ++ cluster_constants(DbName)}.
+    {ok, Res}.
 
 handle_message({ok, Info}, #shard{dbname=Name} = Shard, {Counters, Acc}) ->
     case fabric_dict:lookup_element(Shard, Counters) of
