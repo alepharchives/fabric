@@ -70,6 +70,4 @@ merge_results(Info) ->
     end, [{instance_start_time, <<"0">>}], Dict).
 
 cluster_constants(DbName) ->
-    mem3_util:shard_info(DbName) ++
-        [{r, mem3_util:to_integer(couch_config:get("cluster", "r", "2"))},
-         {w, mem3_util:to_integer(couch_config:get("cluster", "w", "2"))}].
+    mem3_util:shard_info(DbName).
