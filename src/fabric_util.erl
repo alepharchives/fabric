@@ -66,6 +66,8 @@ get_shard([#shard{node = Node, name = Name} | Rest], Opts, Timeout) ->
         get_shard(Rest, Opts, Timeout)
     end.
 
+error_info({{not_found, nil, no_db_file} =Error, _Stack}) ->
+    {nor_found, no_db_file};
 error_info({{<<"reduce_overflow_error">>, _} = Error, _Stack}) ->
     Error;
 error_info({{timeout, _} = Error, _Stack}) ->
